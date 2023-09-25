@@ -167,8 +167,12 @@ def get_meta(metadata_dir='metadata'):
             os.path.join(metadata_dir, 'elwha.json'),
         ]
 
-def evaluate(results_dir, anno_dir, metadata_dir, tracker_name, quiet, iou_thresh=0.5):
-    meta = get_meta(metadata_dir)
+
+def evaluate(results_dir, anno_dir, metadata_dir, tracker_name, quiet, location=None, iou_thresh=0.5):
+    if location is None:
+        meta = get_meta(metadata_dir)
+    else:
+        meta = [os.path.join(metadata_dir, location + '.json')]
     
     results = {}
     for meta_f in meta:
